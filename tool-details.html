@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工具详情 - AI工具集</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .tool-details-container {
+            padding: 40px 0;
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .tool-image-large {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 30px;
+        }
+        
+        .tool-header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .tool-category-large {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 1rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .tool-action-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .tool-action-btn:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .detail-section {
+            margin-bottom: 30px;
+        }
+        
+        .detail-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .detail-section p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-color);
+        }
+        
+        .feature-list, .use-cases-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .feature-item, .use-case-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .feature-item h3, .use-case-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .feature-item p, .use-case-item p {
+            font-size: 1rem;
+            color: var(--light-text-color);
+        }
+        
+        .usage-steps {
+            counter-reset: step-counter;
+            margin: 30px 0;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 25px;
+        }
+        
+        .step-number {
+            counter-increment: step-counter;
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        
+        .step-number::before {
+            content: counter(step-counter);
+        }
+        
+        .step-content {
+            flex-grow: 1;
+        }
+        
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .tool-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .tool-image-large {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .feature-list, .use-cases-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>AI<span>工具集</span></h1>
+                </a>
+            </div>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="搜索AI工具...">
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="category-dropdown">
+                <button class="dropdown-btn">分类 <i class="fas fa-chevron-down"></i></button>
+                <div class="dropdown-content" id="category-menu">
+                    <a href="#" data-category="all">全部</a>
+                    <a href="#" data-category="nlp">自然语言处理</a>
+                    <a href="#" data-category="image">图像处理</a>
+                    <a href="#" data-category="audio">音频处理</a>
+                    <a href="#" data-category="video">视频处理</a>
+                    <a href="#" data-category="data">数据分析</a>
+                </div>
+            </div>
+            <div class="user-actions">
+                <a href="#" class="login-btn">登录</a>
+                <a href="#" class="register-btn">注册</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 工具详情内容 -->
+    <main class="tool-details-container">
+        <div class="container" id="tool-details-content">
+            <!-- 工具详情内容将通过JavaScript动态加载 -->
+        </div>
+    </main>
+
+    <!-- 底部信息栏 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-left">
+                <p>&copy; 2023 AI工具集. 保留所有权利。</p>
+            </div>
+            <div class="footer-right">
+                <p>联系我们: <a href="mailto:contact@aitools.com">contact@aitools.com</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 假设从URL参数中获取工具ID
+        const urlParams = new URLSearchParams(window.location.search);
+        const toolId = parseInt(urlParams.get('id'));
+        
+        // 工具数据（应从数据库或API获取，这里为演示硬编码）
+        const toolsData = [
+            {
+                id: 1,
+                name: "智能文本助手",
+                category: "nlp",
+                categoryName: "自然语言处理",
+                description: "强大的AI文本生成和编辑工具，可帮助您撰写各类文章、邮件、报告等内容",
+                image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                url: "https://example.com/text-assistant",
+                features: [
+                    {
+                        title: "自动生成文本",
+                        description: "基于您提供的关键词和主题，AI能够自动生成高质量、流畅的文本内容"
+                    },
+                    {
+                        title: "智能纠错",
+                        description: "自动检测并纠正文本中的语法、拼写和标点错误，提高文本质量"
+                    },
+                    {
+                        title: "多风格支持",
+                        description: "支持正式、学术、创意、营销等多种写作风格的文本生成和编辑"
+                    },
+                    {
+                        title: "多语言支持",
+                        description: "支持中英文等多种语言的文本生成和编辑，满足不同语言需求"
+                    }
+                ],
+                useCases: [
+                    {
+                        title: "内容创作",
+                        description: "帮助博主、作家等创作者快速生成文章、博客等内容，提高创作效率"
+                    },
+                    {
+                        title: "商业沟通",
+                        description: "协助商务人士起草专业邮件、报告和提案，保持专业性和一致性"
+                    },
+                    {
+                        title: "营销文案",
+                        description: "为市场团队生成有吸引力的广告文案、社交媒体帖子和产品描述"
+                    },
+                    {
+                        title: "学术写作",
+                        description: "辅助学生和研究人员撰写论文摘要、文献综述等学术内容"
+                    }
+                ],
+                steps: [
+                    {
+                        title: "选择任务类型",
+                        description: "在工具界面中选择您需要的任务类型，如文本生成、编辑、润色等"
+                    },
+                    {
+                        title: "输入主题和关键词",
+                        description: "输入您希望文本围绕的主题和关键词，越详细AI生成的内容越贴近您的需求"
+                    },
+                    {
+                        title: "设置参数",
+                        description: "选择所需的文本长度、风格和语言等参数，以获得符合您期望的输出"
+                    },
+                    {
+                        title: "生成和调整",
+                        description: "AI将生成初始文本，您可以根据需要进行微调和编辑，使文本更加完善"
+                    }
+                ]
+            }
+            // 其他工具数据...
+        ];
+        
+        // 根据ID显示工具详情
+        document.addEventListener('DOMContentLoaded', function() {
+            // 尝试从工具数据中找到匹配的工具
+            const tool = toolsData.find(t => t.id === toolId);
+            
+            if (tool) {
+                // 更新页面标题
+                document.title = `${tool.name} - AI工具集`;
+                
+                // 渲染工具详情
+                const toolDetailsContent = document.getElementById('tool-details-content');
+                toolDetailsContent.innerHTML = `
+                    <div class="tool-header">
+                        <img src="${tool.image}" alt="${tool.name}" class="tool-image-large">
+                        <div class="tool-header-content">
+                            <h1>${tool.name}</h1>
+                            <span class="tool-category-large">${tool.categoryName}</span>
+                            <p>${tool.description}</p>
+                            <a href="${tool.url}" target="_blank" class="tool-action-btn">访问工具</a>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h2>主要功能</h2>
+                        <div class="feature-list">
+                            ${tool.features.map(feature => `
+                                <div class="feature-item">
+                                    <h3>${feature.title}</h3>
+                                    <p>${feature.description}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h2>使用场景</h2>
+                        <div class="use-cases-list">
+                            ${tool.useCases.map(useCase => `
+                                <div class="use-case-item">
+                                    <h3>${useCase.title}</h3>
+                                    <p>${useCase.description}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h2>使用方法</h2>
+                        <div class="usage-steps">
+                            ${tool.steps.map(step => `
+                                <div class="step">
+                                    <div class="step-number"></div>
+                                    <div class="step-content">
+                                        <h3>${step.title}</h3>
+                                        <p>${step.description}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else {
+                // 未找到工具，显示错误信息
+                document.getElementById('tool-details-content').innerHTML = `
+                    <div class="container" style="text-align: center; padding: 100px 0;">
+                        <h2>未找到工具</h2>
+                        <p>抱歉，未找到ID为${toolId}的工具信息。</p>
+                        <a href="index.html" class="tool-action-btn">返回首页</a>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
